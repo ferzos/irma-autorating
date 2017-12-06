@@ -11,10 +11,13 @@ python
 ### Project Structure
 ```
 - .gitigore
+- Corrector.py # Object class yang melakukan spelling correction
+- Cutter.py # Object class yang melakukan pemotongan stopword
+- Preprocessing.py # Main program yang melakukan preprocessing pada file input
 - README.md
 - requirements.txt #list package yang harus diinstall
-- stemmer.py #source code
-- stopword_bahasa.txt #list stopword bahasa indonesia
+- singkatan.dict # daftar singkatan bahasa indonesia
+- stopword_bahasa.txt # daftar stopword bahasa indonesia
 
 ```
 
@@ -70,27 +73,27 @@ Semua pengalaman dan pengetahuan industri yang dimilikinya diharapkan dapat mend
 ```
 Kemudian jalankan
 ```
-python stemmer.py <nama file input>
+python Preprocessing.py <nama file input>
 ```
 Expected ouput
 ```
-Starting store stopword...
+Start making abbreviation dictionary for bahasa
 Finished
-Starting cutting and stemming...
+Start making stopword dictionary for bahasa
+Finished
+Start making stemmer for bahasa
+Finished
 Line Number: 1... Done
 Line Number: 2... Done
 Line Number: 3... Done
 Line Number: 4... Done
 Line Number: 5... Done
 Line Number: 6... Done
+Running time: 6.439908953132075
 Finished.
 Output file: output.txt
-Running time: 7.047039363586758
 ```
-
-
-
-
+Terdapat file bernama *ouput.txt* yang merupakan hasil dari preprocessing0
 ## Built With
 
 * [Python](https://www.python.org/) - Programming Language
