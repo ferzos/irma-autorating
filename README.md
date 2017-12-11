@@ -13,12 +13,12 @@ python
 - .gitigore
 - Corrector.py # objek class yang melakukan spelling correction
 - Cutter.py # objek class yang melakukan pemotongan stopword
+- Stemmer.py # objek class yang melakukan stemming
 - emoticon_id  # daftar emoticon untuk sentiment analysis
 - Preprocessing.py # Main program yang melakukan preprocessing pada file input
 - README.md
 - requirements.txt # list package yang harus diinstall
 - singkatan.dict # daftar singkatan bahasa indonesia
-- Stemmer.py # objek class yang melakukan stemming
 - stopword_bahasa.txt # daftar stopword bahasa indonesia
 
 ```
