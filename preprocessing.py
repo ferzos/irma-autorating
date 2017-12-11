@@ -3,7 +3,7 @@ import re
 import timeit
 from Corrector import Corrector
 from Cutter import Cutter
-from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
+from Stemmer import Stemmer
 
 map_emoticon = {}
 
@@ -35,8 +35,7 @@ def main(inputFile):
   print("Finished")
 
   print("Start making stemmer for bahasa")
-  factory = StemmerFactory()
-  stemmer = factory.create_stemmer()
+  stemmer = Stemmer()
   print("Finished")
   
   file_read = open(str(inputFile), "r", encoding='utf-8')
@@ -52,6 +51,7 @@ def main(inputFile):
       sentence = sentence.lower()
       sentence = corrector.correct(sentence, map_emoticon).strip()
       sentence = cutter.cut(sentence, map_emoticon).strip()
+      sentence = stemmer.stem(sentence, map_emoticon).strip()
       if (sentence != ''):
         print(sentence)
 
