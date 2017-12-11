@@ -45,16 +45,17 @@ def main(inputFile):
   for line in file_read.readlines():
     review_number += 1
     user_rating = line.split('<>')[0]
+    file_write.write('REVIEW-' + str(review_number) + ' [rating] ' + str(user_rating) + '\n')
     review = line.split('<>')[1]
     review = erase_question_sentence(review) # Erase question sentence
-    for sentence in re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', review):
+    for i, sentence in enumerate(re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', review)):
+      print("Processing sentence " + str(i+1) + ' from review ' + str(review_number))
       sentence = sentence.lower()
       sentence = corrector.correct(sentence, map_emoticon).strip()
       sentence = cutter.cut(sentence, map_emoticon).strip()
       sentence = stemmer.stem(sentence, map_emoticon).strip()
       if (sentence != ''):
-        print(sentence)
-
+        file_write.write(sentence + "\n")
 
     # line = line.lower()
     # line = re.sub('[^a-zA-Z ]', ' ', line) # Clear special characters
