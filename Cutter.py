@@ -23,11 +23,7 @@ class Cutter:
       else:
         # Only get alphabet, remove emoji
         if (word.isalpha()):
-          word = re.sub('[^a-zA-Z ]', ' ', word) # Clear special characters
-          word = word.strip()
-          if word in self.mapCutter:
-            new_sentence = new_sentence + self.mapCutter[word] + " "
-          else:
+          if word not in self.mapCutter:
             new_sentence = new_sentence + word + " "
     return new_sentence
 

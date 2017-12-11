@@ -11,7 +11,7 @@ def erase_question_sentence(review):
   new_review = ''
   for sentence in re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', review):
    if (len(re.findall(r'\?', sentence)) == 0): # Not question sentence
-     new_review += sentence
+     new_review = new_review + sentence.strip() + " "
   return new_review
 
 def generateEmotMap(file):
@@ -48,11 +48,12 @@ def main(inputFile):
     user_rating = line.split('<>')[0]
     review = line.split('<>')[1]
     review = erase_question_sentence(review) # Erase question sentence
-    for i,sentence in enumerate(re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', review)):
+    for sentence in re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', review):
       sentence = sentence.lower()
       sentence = corrector.correct(sentence, map_emoticon).strip()
       sentence = cutter.cut(sentence, map_emoticon).strip()
-      print(str(i+1) + " " + str(sentence))
+      if (sentence != ''):
+        print(sentence)
 
 
     # line = line.lower()

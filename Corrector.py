@@ -27,10 +27,9 @@ class Corrector:
       if word in map_emoticon:
         new_sentence += word
       else:
+        word = re.sub('[^a-zA-Z ]', '', word) # Clear special characters
         # Only get alphabet, remove emoji
         if (word.isalpha()):
-          word = re.sub('[^a-zA-Z ]', ' ', word) # Clear special characters
-          word = word.strip()
           if word in self.mapCorrection:
             new_sentence = new_sentence + self.mapCorrection[word] + " "
           else:
