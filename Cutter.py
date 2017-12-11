@@ -1,3 +1,5 @@
+import re
+
 class Cutter:
   mapCutter = []
 
@@ -12,11 +14,21 @@ class Cutter:
   def isExist(self, key):
     return key in self.mapCutter
 
-  def cut(self, sentence):
+  def cut(self, sentence, map_emoticon):
     new_sentence = ""
     for word in sentence.split():
-      if word not in self.mapCutter:
-        new_sentence = new_sentence + word + " "
+      # If it is emoticon
+      if word in map_emoticon:
+        new_sentence += word
+      else:
+        # Only get alphabet, remove emoji
+        if (word.isalpha()):
+          word = re.sub('[^a-zA-Z ]', ' ', word) # Clear special characters
+          word = word.strip()
+          if word in self.mapCutter:
+            new_sentence = new_sentence + self.mapCutter[word] + " "
+          else:
+            new_sentence = new_sentence + word + " "
     return new_sentence
 
 

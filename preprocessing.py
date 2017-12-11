@@ -51,6 +51,7 @@ def main(inputFile):
     for i,sentence in enumerate(re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', review)):
       sentence = sentence.lower()
       sentence = corrector.correct(sentence, map_emoticon).strip()
+      sentence = cutter.cut(sentence, map_emoticon).strip()
       print(str(i+1) + " " + str(sentence))
 
 
