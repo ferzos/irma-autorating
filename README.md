@@ -88,7 +88,7 @@ Line Number: 2... Done
 Line Number: 3... Done
 Line Number: 4... Done
 Line Number: 5... Done
-Line Number: 6... Done
+Line Number: 6... Done\
 Running time: 6.439908953132075
 Finished.
 Output file: output.txt
