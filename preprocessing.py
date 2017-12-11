@@ -5,15 +5,27 @@ from Corrector import Corrector
 from Cutter import Cutter
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 
+map_emoticon = {}
+
 def erase_question_sentence(review):
   new_review = ''
   for sentence in re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', review):
    if (len(re.findall(r'\?', sentence)) == 0): # Not question sentence
      new_review += sentence
   return new_review
-  
 
+def generateEmotMap(file):
+  new_map_emoticon = {}
+  file_read = open(str(file), "r")
+  for line in file_read.readlines():
+    new_map_emoticon[line.split(" | ")[0].strip()] = line.split(" | ")[1].strip()
+  return new_map_emoticon
+  
 def main(inputFile):
+  print("Start making emoticon map")
+  map_emoticon = generateEmotMap('emoticon_id.txt')
+  print("Finished")
+  
   print("Start making abbreviation dictionary for bahasa")
   corrector = Corrector('singkatan.dic')
   print("Finished")
@@ -36,10 +48,11 @@ def main(inputFile):
     user_rating = line.split('<>')[0]
     review = line.split('<>')[1]
     review = erase_question_sentence(review) # Erase question sentence
-    
-    # for sentence in re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', line):
-    #   if not (re.match('^[\w ]+[?]$', sentence)): # Include sentence that are not question sentence
-    #     file_write.write(sentence + '\n')
+    for i,sentence in enumerate(re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', review)):
+      sentence = sentence.lower()
+      sentence = corrector.correct(sentence, map_emoticon).strip()
+      print(str(i+1) + " " + str(sentence))
+
 
     # line = line.lower()
     # line = re.sub('[^a-zA-Z ]', ' ', line) # Clear special characters

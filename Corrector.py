@@ -1,3 +1,5 @@
+import re
+
 class Corrector:
   mapCorrection = {}
 
@@ -18,11 +20,19 @@ class Corrector:
   def isExist(self, key):
     return key in self.mapCorrection
 
-  def correct(self, sentence):
+  def correct(self, sentence, map_emoticon):
     new_sentence = ""
     for word in sentence.split():
-      if word in self.mapCorrection:
-        new_sentence = new_sentence + self.mapCorrection[word] + " "
+      # If it is emoticon
+      if word in map_emoticon:
+        new_sentence += word
       else:
-        new_sentence = new_sentence + word + " "
+        # Only get alphabet, remove emoji
+        if (word.isalpha()):
+          word = re.sub('[^a-zA-Z ]', ' ', word) # Clear special characters
+          word = word.strip()
+          if word in self.mapCorrection:
+            new_sentence = new_sentence + self.mapCorrection[word] + " "
+          else:
+            new_sentence = new_sentence + word + " "
     return new_sentence
