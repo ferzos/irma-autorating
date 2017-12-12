@@ -13,9 +13,10 @@ python
 - .gitigore
 - Corrector.py # objek class yang melakukan spelling correction
 - Cutter.py # objek class yang melakukan pemotongan stopword
+- Preprocessing.py # Main program yang melakukan preprocessing pada file input
 - Stemmer.py # objek class yang melakukan stemming
 - emoticon_id  # daftar emoticon untuk sentiment analysis
-- Preprocessing.py # Main program yang melakukan preprocessing pada file input
+- input_example.txt # Contoh input untuk program
 - README.md
 - requirements.txt # list package yang harus diinstall
 - singkatan.dict # daftar singkatan bahasa indonesia
@@ -71,7 +72,7 @@ Contoh:
 ```
 Kemudian jalankan
 ```
-python Preprocessing.py <nama file input>
+python Preprocessing.py <nama file input> <nama file output>
 ```
 Expected ouput
 ```

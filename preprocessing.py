@@ -38,8 +38,9 @@ def main(inputFile):
   stemmer = Stemmer()
   print("Finished")
   
+  output_file = sys.argv[2] + '.txt'
   file_read = open(str(inputFile), "r", encoding='utf-8')
-  file_write = open("output.txt", "w", encoding='utf-8')
+  file_write = open(output_file, "w", encoding='utf-8')
   start = timeit.default_timer()
   review_number = 0;
   for line in file_read.readlines():
@@ -56,20 +57,9 @@ def main(inputFile):
       sentence = stemmer.stem(sentence, map_emoticon).strip()
       if (sentence != ''):
         file_write.write(sentence + "\n")
-
-    # line = line.lower()
-    # line = re.sub('[^a-zA-Z ]', ' ', line) # Clear special characters
-    # line = corrector.correct(line).strip()
-    # line = cutter.cut(line).strip()
-    # line = stemmer.stem(line)
-    # if line:
-    #   print("Line Number: " + str(i+1) + "... Done")
-    #   file_write.write(line + "\n")
-    # else:
-    #   print("Line Number " + str(i+1) + ' was deleted')
   stop = timeit.default_timer()
   print("Running time: " + str(stop - start))
-  print("Finished.\nOutput file: output.txt")
+  print("Finished.\nOutput file: " + output_file)
   file_read.close()
   file_write.close()
   
