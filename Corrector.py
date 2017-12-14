@@ -20,12 +20,15 @@ class Corrector:
   def isExist(self, key):
     return key in self.mapCorrection
 
-  def correct(self, sentence, map_emoticon):
+  def correct(self, sentence, map_emoticon, map_senti):
     new_sentence = ""
     for word in sentence.split():
       # If it is emoticon
       if word in map_emoticon:
-        new_sentence += word
+        new_sentence = new_sentence + word + " "
+      # If it is a sentiment word
+      elif word in map_senti:
+        new_sentence = new_sentence + word + " "
       else:
         word = re.sub('[^a-zA-Z ]', '', word) # Clear special characters
         # Only get alphabet, remove emoji

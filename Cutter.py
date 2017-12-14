@@ -14,12 +14,15 @@ class Cutter:
   def isExist(self, key):
     return key in self.mapCutter
 
-  def cut(self, sentence, map_emoticon):
+  def cut(self, sentence, map_emoticon, map_senti):
     new_sentence = ""
     for word in sentence.split():
       # If it is emoticon
       if word in map_emoticon:
-        new_sentence += word
+        new_sentence = new_sentence + word + " "
+      # If it is a sentiment word
+      elif word in map_senti:
+        new_sentence = new_sentence + word + " " 
       else:
         # Only get alphabet, remove emoji
         if (word.isalpha()):

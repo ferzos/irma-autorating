@@ -6,6 +6,7 @@ from Cutter import Cutter
 from Stemmer import Stemmer
 
 map_emoticon = {}
+map_senti = set([])
 
 def erase_question_sentence(review):
   new_review = ''
@@ -20,10 +21,26 @@ def generateEmotMap(file):
   for line in file_read.readlines():
     new_map_emoticon[line.split(" | ")[0].strip()] = line.split(" | ")[1].strip()
   return new_map_emoticon
+
+def generateSentiMap(array_file):
+  new_map_senti = set([])
+  for file in array_file:
+    file_read = open(str(file), 'r')
+    if (file == 'negatingword.txt'):
+      for line in file_read.readlines():
+        new_map_senti.add(line.strip())
+    else:
+      for line in file_read.readlines():
+        new_map_senti.add(line.split(':')[0].strip())
+  return new_map_senti
   
 def main(inputFile):
   print("Start making emoticon map")
   map_emoticon = generateEmotMap('emoticon_id.txt')
+  print("Finished")
+
+  print("Start making senti map")
+  map_senti = generateSentiMap(['boosterwords_id.txt', 'idioms_id.txt', 'negatingword.txt', 'sentiwords_id.txt'])
   print("Finished")
   
   print("Start making abbreviation dictionary for bahasa")
@@ -52,9 +69,9 @@ def main(inputFile):
     for i, sentence in enumerate(re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', review)):
       print("Processing sentence " + str(i+1) + ' from review ' + str(review_number))
       sentence = sentence.lower()
-      sentence = corrector.correct(sentence, map_emoticon).strip()
-      sentence = cutter.cut(sentence, map_emoticon).strip()
-      sentence = stemmer.stem(sentence, map_emoticon).strip()
+      sentence = corrector.correct(sentence, map_emoticon, map_senti).strip()
+      sentence = cutter.cut(sentence, map_emoticon, map_senti).strip()
+      sentence = stemmer.stem(sentence, map_emoticon, map_senti).strip()
       if (sentence != ''):
         file_write.write(sentence + "\n")
   stop = timeit.default_timer()
