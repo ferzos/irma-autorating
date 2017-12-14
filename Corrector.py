@@ -1,5 +1,5 @@
 import re
-
+from Normalizer import removeDups
 class Corrector:
   mapCorrection = {}
 
@@ -30,7 +30,10 @@ class Corrector:
       elif word in map_senti:
         new_sentence = new_sentence + word + " "
       else:
-        word = re.sub('[^a-zA-Z ]', '', word) # Clear special characters
+        word = re.sub('[^a-zA-Z ]', ' ', word) # Clear special characters
+        # Clear duplicate char
+        if (word != ''):
+          word = removeDups(word)
         # Only get alphabet, remove emoji
         if (word.isalpha()):
           if word in self.mapCorrection:

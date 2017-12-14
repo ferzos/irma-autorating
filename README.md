@@ -11,16 +11,17 @@ python
 ### Project Structure
 ```
 - .gitigore
-- Corrector.py # objek class yang melakukan spelling correction
-- Cutter.py # objek class yang melakukan pemotongan stopword
-- Preprocessing.py # Main program yang melakukan preprocessing pada file input
-- Stemmer.py # objek class yang melakukan stemming
-- emoticon_id  # daftar emoticon untuk sentiment analysis
-- input_example.txt # Contoh input untuk program
+- Corrector.py: objek class yang melakukan spelling correction
+- Cutter.py: objek class yang melakukan pemotongan stopword
+- Preprocessing.py: Main program yang melakukan preprocessing pada file input
+- Stemmer.py: objek class yang melakukan stemming
+- boosterwords_id.txt, idioms_id.txt, negatingword.txt, sentiwords_id.txt: daftar kata yang memuatkan kata yang mengindikasikan sentimen
+- emoticon_id: daftar emoticon untuk sentiment analysis
+- input_example.txt: Contoh input untuk program
 - README.md
-- requirements.txt # list package yang harus diinstall
-- singkatan.dict # daftar singkatan bahasa indonesia
-- stopword_bahasa.txt # daftar stopword bahasa indonesia
+- requirements.txt: list package yang harus diinstall
+- singkatan.dict: daftar singkatan bahasa indonesia
+- stopword_bahasa.txt: daftar stopword bahasa indonesia
 
 ```
 

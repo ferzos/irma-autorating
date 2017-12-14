@@ -4,6 +4,7 @@ import timeit
 from Corrector import Corrector
 from Cutter import Cutter
 from Stemmer import Stemmer
+import winsound
 
 map_emoticon = {}
 map_senti = set([])
@@ -79,5 +80,8 @@ def main(inputFile):
   print("Finished.\nOutput file: " + output_file)
   file_read.close()
   file_write.close()
+  duration = 1000  # millisecond
+  freq = 440  # Hz
+  winsound.Beep(freq, duration)
   
 main(sys.argv[1])
