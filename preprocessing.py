@@ -64,7 +64,10 @@ def main(inputFile):
   for line in file_read.readlines():
     review_number += 1
     user_rating = line.split('<>')[0]
-    file_write.write('REVIEW-' + str(review_number) + ' [rating] ' + str(user_rating) + '\n')
+    sentence_number = 0
+    header_string = 'REVIEW-' + str(review_number) + ' ' + str(user_rating)
+    body_string = ''
+    # file_write.write('REVIEW-' + str(review_number) + ' [rating] ' + str(user_rating) + '\n')
     review = line.split('<>')[1]
     review = erase_question_sentence(review) # Erase question sentence
     for i, sentence in enumerate(re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', review)):
@@ -74,7 +77,12 @@ def main(inputFile):
       sentence = cutter.cut(sentence, map_emoticon, map_senti).strip()
       sentence = stemmer.stem(sentence, map_emoticon, map_senti).strip()
       if (sentence != ''):
-        file_write.write(sentence + "\n")
+        # file_write.write(sentence + "\n")
+        body_string = body_string + sentence + '\n'
+        sentence_number += 1
+    header_string = header_string + ' ' + str(sentence_number) + '\n'
+    output_string = header_string + body_string
+    file_write.write(output_string)
   stop = timeit.default_timer()
   print("Running time: " + str(stop - start))
   print("Finished.\nOutput file: " + output_file)
